@@ -9,7 +9,6 @@
 [![Downloads](https://img.shields.io/github/downloads/fiqihbadrian/DrawOverlay/total?style=for-the-badge&label=Downloads)](https://github.com/fiqihbadrian/DrawOverlay/releases)
 [![Stars](https://img.shields.io/github/stars/fiqihbadrian/DrawOverlay?style=for-the-badge)](https://github.com/fiqihbadrian/DrawOverlay/stargazers)
 [![Issues](https://img.shields.io/github/issues/fiqihbadrian/DrawOverlay?style=for-the-badge)](https://github.com/fiqihbadrian/DrawOverlay/issues)
-[![License](https://img.shields.io/github/license/fiqihbadrian/DrawOverlay?style=for-the-badge)](https://github.com/fiqihbadrian/DrawOverlay)
 
 
 </div>
