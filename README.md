@@ -1,5 +1,5 @@
 <div align="center">
-<img width="2000" height="2000" alt="DrawOverlay" src="https://github.com/user-attachments/assets/be99bbae-84ab-4208-87b4-2b8bc7e38345" />
+<img width="200" height="200" alt="DrawOverlay" src="https://github.com/user-attachments/assets/be99bbae-84ab-4208-87b4-2b8bc7e38345" />
 
 
 # DrawOverlay
