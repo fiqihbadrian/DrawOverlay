@@ -7,18 +7,18 @@
 
 </div>
 
-## What is DrawOverlay?
+### What is DrawOverlay?
 
 DrawOverlay turns your Android screen into a transparent canvas. You can use it while studying, watching videos, explaining something, solving problems, or drawing quick notes directly over your screen.
 
-## Features
+### Features
 Draw directly over other applications
 Transparent overlay canvas
 Floating controls for quick access
 Write and sketch freely
 Useful for studying, presentations, tutorials, and explanations
 Lightweight and easy to use
-## Download & Install
+### Download & Install
 Open the Latest Release.
 Download the latest .apk file.
 Install the APK on your Android device.
@@ -27,11 +27,11 @@ Open DrawOverlay and start drawing.
 
 > Note: DrawOverlay requires permission to display over other apps because the drawing canvas works as an Android overlay.
 
-## Screenshots
+### Screenshots
 
 Coming soon.
 
-## Support
+### Support
 
 If you find a bug or have a feature request, please open an Issue in this repository.
 
