@@ -4,6 +4,12 @@
 
 # DrawOverlay
 **Draw, annotate, and interact with a transparent overlay directly on your Android screen.**
+[![Latest Release](https://img.shields.io/github/v/release/fiqihbadrian/DrawOverlay?style=for-the-badge&label=Latest%20Release)](https://github.com/fiqihbadrian/DrawOverlay/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/fiqihbadrian/DrawOverlay/total?style=for-the-badge&label=Downloads)](https://github.com/fiqihbadrian/DrawOverlay/releases)
+[![Stars](https://img.shields.io/github/stars/fiqihbadrian/DrawOverlay?style=for-the-badge)](https://github.com/fiqihbadrian/DrawOverlay/stargazers)
+[![Issues](https://img.shields.io/github/issues/fiqihbadrian/DrawOverlay?style=for-the-badge)](https://github.com/fiqihbadrian/DrawOverlay/issues)
+[![License](https://img.shields.io/github/license/fiqihbadrian/DrawOverlay?style=for-the-badge)](https://github.com/fiqihbadrian/DrawOverlay)
+
 
 </div>
 
