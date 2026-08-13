@@ -2,8 +2,8 @@
 <img width="200" height="200" alt="DrawOverlay" src="https://github.com/user-attachments/assets/be99bbae-84ab-4208-87b4-2b8bc7e38345" />
 
 
-# DrawOverlay
-**Draw, annotate, and interact with a transparent overlay directly on your Android screen.**
+<h1>DrawOverlay</h1>
+<h3>Draw, annotate, and interact with a transparent overlay directly on your Android screen.</h3>
 </br>
 [![Latest Release](https://img.shields.io/github/v/release/fiqihbadrian/DrawOverlay?style=for-the-badge&label=Latest%20Release)](https://github.com/fiqihbadrian/DrawOverlay/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/fiqihbadrian/DrawOverlay/total?style=for-the-badge&label=Downloads)](https://github.com/fiqihbadrian/DrawOverlay/releases)
