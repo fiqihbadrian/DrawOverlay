@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog — Stellaire DrawOverlay</title>
+  <meta name="description" content="Riwayat perubahan dan rilis Stellaire DrawOverlay." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%233B82F6'/%3E%3Cpath d='M20 42l4-10 14-14 6 6-14 14z' fill='%23fff'/%3E%3Cpath d='M40 20l4 4' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================= Navbar ================= -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+            <circle cx="11" cy="11" r="2" />
+          </svg>
+        </span>
+        Stellaire DrawOverlay
+      </a>
+
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+
+      <nav aria-label="Navigasi utama">
+        <ul class="nav-links">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="docs.html">Dokumentasi</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="changelog.html" class="active">Changelog</a></li>
+          <li><a href="privacy.html">Privasi</a></li>
+          <li class="nav-cta">
+            <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="btn btn-primary btn-sm">Unduh APK</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <div class="page-head">
+        <p class="kicker">Changelog</p>
+        <h1>Riwayat Versi</h1>
+        <p>Perubahan terbaru pertama. Versi saat ini: <strong>1.0.0</strong> (build 1).</p>
+      </div>
+
+      <div class="timeline">
+        <div class="version">
+          <h2>v1.0.0 — Rilis Perdana</h2>
+          <p class="date">Agustus 2026</p>
+          <ul>
+            <li><span class="tag tag-new">Baru</span> Desain sistem Material 3: tema gelap kaca (glassmorphism), palet biru, tipografi modern.</li>
+            <li><span class="tag tag-new">Baru</span> Lapisan Android: overlay service, window manager, kanal Flutter ↔ native, penyimpanan MediaStore.</li>
+            <li><span class="tag tag-new">Baru</span> Kanvas inti: model goresan, controller Riverpod, painter goresan halus (bezier &amp; spline Catmull-Rom).</li>
+            <li><span class="tag tag-new">Baru</span> Quick menu saat ikon overlay diketuk: pen, penghapus, ukuran, warna, undo/redo, bersihkan, simpan, tembus, hentikan.</li>
+            <li><span class="tag tag-new">Baru</span> Simpan PNG ke galeri (<code>Pictures/DrawOverlay</code>) — PNG transparan atau menyertakan latar layar (MediaProjection).</li>
+            <li><span class="tag tag-new">Baru</span> Baris izin "Izin Layar" di beranda, setelan penyimpanan, dan refresh izin real-time saat kembali ke aplikasi.</li>
+            <li><span class="tag tag-new">Baru</span> Izin penuh ditambahkan untuk pengenalan tulisan tangan on-device (ML Kit digital ink).</li>
+            <li><span class="tag tag-fix">Perbaikan</span> Toolbar anti-lag (seleksi state Riverpod), perbaikan scroll beranda agar tidak overflow.</li>
+            <li><span class="tag tag-fix">Perbaikan</span> Teardown overlay anti-crash saat berhenti; sinkronisasi polling native ↔ Dart yang lebih andal.</li>
+            <li><span class="tag tag-fix">Perbaikan</span> Ikon overlay diperkecil dan dibulatkan — murni logo aplikasi tanpa lingkaran biru.</li>
+          </ul>
+        </div>
+
+        <div class="version">
+          <h2>Pra-rilis (Pengembangan)</h2>
+          <p class="date">Juni – Juli 2026</p>
+          <ul>
+            <li><span class="tag tag-new">Baru</span> Inisialisasi proyek Flutter dengan Riverpod &amp; SharedPreferences.</li>
+            <li><span class="tag tag-new">Baru</span> Quick menu awal: ikon cepat untuk mengaktifkan kanvas saat floating button diketuk.</li>
+            <li><span class="tag tag-new">Baru</span> Penyimpanan ke galeri dengan kuas halus bezier.</li>
+            <li><span class="tag tag-fix">Perbaikan</span> Popup menu saat floating button diketuk dan teardown service anti-crash.</li>
+            <li><span class="tag tag-fix">Perbaikan</span> Sinkronisasi state window (native sebagai sumber kebenaran) dan feedback toast.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+            <circle cx="11" cy="11" r="2" />
+          </svg>
+        </span>
+        Stellaire DrawOverlay
+      </a>
+      <ul class="footer-links">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="docs.html">Dokumentasi</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+        <li><a href="privacy.html">Kebijakan Privasi</a></li>
+      </ul>
+      <p class="footer-copy">© <span class="js-year">2026</span> Stellaire DrawOverlay · Draw Anywhere.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

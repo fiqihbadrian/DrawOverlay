@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kebijakan Privasi — Stellaire DrawOverlay</title>
+  <meta name="description" content="Kebijakan Privasi Stellaire DrawOverlay: aplikasi tidak mengumpulkan, menyimpan, atau mengirimkan data pribadi apa pun." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%233B82F6'/%3E%3Cpath d='M20 42l4-10 14-14 6 6-14 14z' fill='%23fff'/%3E%3Cpath d='M40 20l4 4' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================= Navbar ================= -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+            <circle cx="11" cy="11" r="2" />
+          </svg>
+        </span>
+        Stellaire DrawOverlay
+      </a>
+
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+
+      <nav aria-label="Navigasi utama">
+        <ul class="nav-links">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="docs.html">Dokumentasi</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
+          <li><a href="privacy.html" class="active">Privasi</a></li>
+          <li class="nav-cta">
+            <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="btn btn-primary btn-sm">Unduh APK</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <div class="page-head">
+        <p class="kicker">Kebijakan Privasi</p>
+        <h1>Privasi Anda, Prioritas Kami</h1>
+        <p>Singkatnya: <strong>DrawOverlay tidak mengumpulkan data apa pun dari Anda.</strong></p>
+      </div>
+
+      <article class="prose">
+        <h2>1. Ringkasan</h2>
+        <p>
+          Stellaire DrawOverlay (<em>"DrawOverlay"</em>, <em>"aplikasi"</em>, <em>"kami"</em>)
+          tidak mengumpulkan, menyimpan, atau mengirimkan data pribadi apa pun.
+          Semua gambar yang Anda buat tersimpan hanya di perangkat Anda.
+          Aplikasi tidak memerlukan akun, tidak menampilkan iklan, dan tidak melacak aktivitas Anda.
+        </p>
+
+        <h2>2. Data yang Dikumpulkan</h2>
+        <p><strong>Tidak ada.</strong> DrawOverlay tidak mengumpulkan:</p>
+        <ul>
+          <li>Data pribadi (nama, email, nomor telepon);</li>
+          <li>Data lokasi;</li>
+          <li>Riwayat penggunaan atau aktivitas menggambar;</li>
+          <li>Konten gambar Anda;</li>
+          <li>Identifier perangkat atau data analitik.</li>
+        </ul>
+        <p>Semua pemrosesan dilakukan <strong>on-device</strong> (di perangkat Anda), termasuk pengenalan tulisan tangan pada Mode Matematika.</p>
+
+        <h2>3. Izin yang Digunakan</h2>
+        <p>Izin berikut hanya dipakai untuk menjalankan fitur yang Anda aktifkan:</p>
+        <table>
+          <tr><th>Izin</th><th>Tujuan</th></tr>
+          <tr><td>Overlay</td><td>Menampilkan ikon melayang &amp; kanvas transparan di atas aplikasi lain.</td></tr>
+          <tr><td>Notifikasi</td><td>Menampilkan notifikasi bahwa overlay sedang aktif.</td></tr>
+          <tr><td>Penyimpanan</td><td>Menyimpan PNG yang Anda simpan ke galeri (<code>Pictures/DrawOverlay</code>).</td></tr>
+          <tr><td>Izin Layar (MediaProjection)</td><td>Opsional — menyertakan tampilan layar ke dalam PNG saat Anda memilih opsi simpan dengan latar.</td></tr>
+        </table>
+
+        <h2>4. Penyimpanan Data</h2>
+        <p>
+          Gambar yang Anda simpan disimpan di galeri perangkat Anda dalam format PNG
+          dan tetap berada di bawah kendali penuh Anda. Anda dapat menghapusnya kapan saja
+          melalui aplikasi Galeri. Preferensi aplikasi (misalnya pilihan bahasa dan opasitas menu)
+          disimpan secara lokal di perangkat melalui <code>SharedPreferences</code>.
+        </p>
+
+        <h2>5. Koneksi Internet</h2>
+        <p>
+          DrawOverlay dapat digunakan sepenuhnya <strong>tanpa koneksi internet</strong>.
+          Tidak ada data yang dikirim ke server kami atau pihak ketiga mana pun.
+          Model pengenalan tulisan tangan pada Mode Matematika diproses langsung di perangkat Anda.
+        </p>
+
+        <h2>6. Iklan &amp; Analitik</h2>
+        <p>
+          Aplikasi ini <strong>tidak menampilkan iklan</strong>, tidak menyematkan SDK
+          pihak ketiga untuk analitik, pelacakan, atau periklanan, dan tidak berbagi data
+          dengan pihak ketiga mana pun.
+        </p>
+
+        <h2>7. Data Anak-anak</h2>
+        <p>
+          Karena aplikasi tidak mengumpulkan data apa pun, aplikasi ini aman digunakan oleh
+          siapa saja termasuk anak-anak tanpa ada pengumpulan data pribadi.
+        </p>
+
+        <h2>8. Perubahan Kebijakan</h2>
+        <p>
+          Kebijakan privasi ini dapat diperbarui sewaktu-waktu. Perubahan yang bersifat
+          material akan diumumkan melalui halaman ini dan riwayat versi aplikasi.
+          Dengan terus menggunakan aplikasi, Anda dianggap menyetujui kebijakan yang berlaku.
+        </p>
+
+        <h2>9. Kontak</h2>
+        <p>
+          Jika Anda memiliki pertanyaan tentang kebijakan privasi ini, silakan hubungi kami
+          melalui <a href="https://github.com/fiqihbadrian/DrawOverlay/issues">Issues GitHub</a>.
+        </p>
+
+        <div class="note"><strong>Berlaku sejak:</strong> Agustus 2026 · Versi aplikasi: 1.0.0</div>
+      </article>
+    </div>
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+            <circle cx="11" cy="11" r="2" />
+          </svg>
+        </span>
+        Stellaire DrawOverlay
+      </a>
+      <ul class="footer-links">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="docs.html">Dokumentasi</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+        <li><a href="privacy.html">Kebijakan Privasi</a></li>
+      </ul>
+      <p class="footer-copy">© <span class="js-year">2026</span> Stellaire DrawOverlay · Draw Anywhere.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dokumentasi — Stellaire DrawOverlay</title>
+  <meta name="description" content="Dokumentasi resmi Stellaire DrawOverlay: cara mulai, izin, menggambar, mode kanvas, menyimpan PNG, mode matematika, dan pemecahan masalah." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%233B82F6'/%3E%3Cpath d='M20 42l4-10 14-14 6 6-14 14z' fill='%23fff'/%3E%3Cpath d='M40 20l4 4' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================= Navbar ================= -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+            <circle cx="11" cy="11" r="2" />
+          </svg>
+        </span>
+        Stellaire DrawOverlay
+      </a>
+
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+
+      <nav aria-label="Navigasi utama">
+        <ul class="nav-links">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="docs.html" class="active">Dokumentasi</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
+          <li><a href="privacy.html">Privasi</a></li>
+          <li class="nav-cta">
+            <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="btn btn-primary btn-sm">Unduh APK</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <div class="page-head">
+        <p class="kicker">Dokumentasi</p>
+        <h1>Panduan Stellaire DrawOverlay</h1>
+        <p>Semua yang perlu Anda ketahui untuk menggunakan DrawOverlay — dari izin pertama hingga menyimpan hasil gambar.</p>
+      </div>
+
+      <div class="docs-layout">
+        <!-- TOC -->
+        <nav class="toc" aria-label="Daftar isi">
+          <p class="toc-label">Daftar Isi</p>
+          <a href="#persyaratan">Persyaratan</a>
+          <a href="#instalasi">Instalasi</a>
+          <a href="#izin">Izin yang Dibutuhkan</a>
+          <a href="#ikon-overlay">Ikon Overlay</a>
+          <a href="#menggambar">Menggambar</a>
+          <a href="#quick-menu">Quick Menu</a>
+          <a href="#mode-kanvas">Mode Kanvas</a>
+          <a href="#kotak-layer">Kotak Kanvas &amp; Layer</a>
+          <a href="#menyimpan">Menyimpan PNG</a>
+          <a href="#mode-matematika">Mode Matematika</a>
+          <a href="#setelan">Setelan</a>
+          <a href="#pemecahan">Pemecahan Masalah</a>
+        </nav>
+
+        <!-- Konten -->
+        <article class="prose">
+          <h2 id="persyaratan">1. Persyaratan Sistem</h2>
+          <table>
+            <tr><th>Platform</th><td>Android</td></tr>
+            <tr><th>Versi minimal</th><td>Android 10 (API 29)</td></tr>
+            <tr><th>Koneksi internet</th><td>Tidak diperlukan (semua proses on-device)</td></tr>
+            <tr><th>Akun / login</th><td>Tidak diperlukan</td></tr>
+          </table>
+
+          <h2 id="instalasi">2. Instalasi</h2>
+          <ol>
+            <li>Unduh file <code>.apk</code> dari halaman <a href="https://github.com/fiqihbadrian/DrawOverlay/releases">Releases</a>.</li>
+            <li>Buka file tersebut di HP Android Anda.</li>
+            <li>Jika muncul peringatan <em>"instal dari sumber tidak dikenal"</em>, izinkan (biasanya di <strong>Setelan → Keamanan → Instal aplikasi tidak dikenal</strong>).</li>
+            <li>Buka aplikasi <strong>Stellaire DrawOverlay</strong>.</li>
+          </ol>
+
+          <h2 id="izin">3. Izin yang Dibutuhkan</h2>
+          <p>DrawOverlay membutuhkan beberapa izin agar bisa menggambar di atas aplikasi lain. Semua izin hanya digunakan untuk fitur yang Anda aktifkan.</p>
+          <table>
+            <tr><th>Izin</th><th>Kegunaan</th></tr>
+            <tr><td><strong>Overlay</strong></td><td>Menampilkan ikon melayang &amp; kanvas transparan di atas aplikasi lain (wajib).</td></tr>
+            <tr><td><strong>Notifikasi</strong></td><td>Menampilkan notifikasi "overlay aktif" (Android 13+).</td></tr>
+            <tr><td><strong>Penyimpanan</strong></td><td>Menyimpan PNG ke galeri Anda (<code>Pictures/DrawOverlay</code>).</td></tr>
+            <tr><td><strong>Izin Layar</strong></td><td>Opsional — untuk menyertakan tampilan layar saat menyimpan PNG (MediaProjection).</td></tr>
+          </table>
+          <div class="note">
+            <strong>Catatan:</strong> semua izin dapat dicabut kapan saja lewat Setelan Android. Tanpa izin Overlay, aplikasi tidak dapat menggambar di atas aplikasi lain.
+          </div>
+
+          <h2 id="ikon-overlay">4. Ikon Overlay (Floating Button)</h2>
+          <p>Setelah menekan <strong>Start Overlay</strong>, sebuah ikon bulat muncul di pojok layar. Ikon ini selalu tersedia selama overlay aktif.</p>
+          <ul>
+            <li><strong>Ketuk</strong> — membuka/menutup quick menu dan mengaktifkan kanvas untuk menggambar.</li>
+            <li><strong>Tarik</strong> — memindahkan ikon ke posisi lain di layar.</li>
+          </ul>
+
+          <h2 id="menggambar">5. Menggambar</h2>
+          <p>Setelah kanvas aktif, semua sentuhan di layar digunakan untuk menggambar. Toolbar menyediakan:</p>
+          <ul>
+            <li><strong>Pen / Brush</strong> — goresan halus dengan interpolasi bezier &amp; spline Catmull-Rom.</li>
+            <li><strong>Penghapus</strong> — menghapus sebagian goresan.</li>
+            <li><strong>Ukuran</strong> — mengatur ketebalan pena/penghapus.</li>
+            <li><strong>Warna</strong> — preset, hex kustom, dan mode pelangi.</li>
+            <li><strong>Undo / Redo</strong> — membatalkan / mengulang goresan.</li>
+            <li><strong>Bersihkan</strong> — menghapus seluruh isi kanvas (masih bisa di-undo).</li>
+          </ul>
+
+          <h2 id="quick-menu">6. Quick Menu</h2>
+          <p>Ketuk ikon overlay untuk membuka quick menu berisi aksi cepat:</p>
+          <ul>
+            <li><strong>Kanvas</strong> — aktifkan/nonaktifkan kanvas menggambar.</li>
+            <li><strong>Pen, Penghapus, Ukuran, Warna</strong> — pintasan alat gambar.</li>
+            <li><strong>Undo / Redo / Bersihkan</strong> — manajemen goresan.</li>
+            <li><strong>Simpan</strong> — simpan PNG ke galeri.</li>
+            <li><strong>Tembus</strong> — sentuhan diteruskan ke aplikasi belakang.</li>
+            <li><strong>Hentikan</strong> — menutup overlay sepenuhnya.</li>
+          </ul>
+
+          <h2 id="mode-kanvas">7. Mode Kanvas</h2>
+          <p>DrawOverlay memiliki tiga mode utama:</p>
+          <ul>
+            <li><strong>Mode Menggambar (Drawing Mode)</strong> — kanvas aktif, semua sentuhan untuk menggambar.</li>
+            <li><strong>Mode Tembus (Touch-Through)</strong> — kanvas tetap terlihat tetapi sentuhan diteruskan ke aplikasi di belakang.</li>
+            <li><strong>Mode Tersembunyi (Hidden)</strong> — kanvas disembunyikan; ikon overlay tetap tampil untuk diaktifkan kembali.</li>
+          </ul>
+
+          <h2 id="kotak-layer">8. Kotak Kanvas &amp; Layer</h2>
+          <ul>
+            <li><strong>Kotak Kanvas</strong> — buat area kanvas kecil terpisah untuk menggambar di satu bagian layar, atau hapus kotak yang tidak dipakai.</li>
+            <li><strong>Layer</strong> — tambah, tampilkan, atau sembunyikan layer; goresan tiap layer dapat dihapus tanpa memengaruhi layer lain.</li>
+          </ul>
+
+          <h2 id="menyimpan">9. Menyimpan PNG</h2>
+          <p>Tekan <strong>Simpan</strong> untuk menyimpan gambar sebagai PNG ke galeri (<code>Pictures/DrawOverlay</code>). Ada dua perilaku:</p>
+          <ul>
+            <li><strong>PNG transparan</strong> — hanya goresan Anda dengan latar transparan.</li>
+            <li><strong>PNG dengan latar layar</strong> — menyertakan screenshot layar di belakang goresan (membutuhkan izin layar / MediaProjection).</li>
+          </ul>
+          <div class="note">
+            <strong>Catatan:</strong> tanpa izin layar, penyimpanan hanya berisi goresan di kanvas — <em>bukan</em> screenshot layar. Untuk menyertakan tampilan layar, gunakan izin layar atau fitur screenshot bawaan HP Anda.
+          </div>
+
+          <h2 id="mode-matematika">10. Mode Matematika (Beta)</h2>
+          <p>Mode Matematika mengenali tulisan tangan Anda langsung di perangkat (pengenalan digital ink ML Kit on-device) lalu mengevaluasi ekspresinya. Tidak ada data yang dikirim ke internet — semuanya diproses lokal. Dukung pengenalan simbol dengan mengoreksi hasil lewat dialog pilihan simbol; koreksi Anda disimpan untuk belajar.</p>
+          <div class="note"><strong>Status:</strong> Mode Matematika masih dalam pengembangan dan penyempurnaan.</div>
+
+          <h2 id="setelan">11. Setelan</h2>
+          <ul>
+            <li><strong>Bahasa</strong> — Bahasa Indonesia atau English (otomatis mengikuti bahasa sistem, bisa diubah manual).</li>
+            <li><strong>Opasitas menu</strong> — transparansi panel menu saat ikon overlay diketuk (0% = transparan penuh).</li>
+            <li><strong>Informasi aplikasi</strong> — nama, versi, dan deskripsi singkat.</li>
+            <li><strong>Kebijakan</strong> — tautan ke Kebijakan Privasi.</li>
+          </ul>
+
+          <h2 id="pemecahan">12. Pemecahan Masalah</h2>
+          <h3>Kanvas tidak muncul setelah menekan Start Overlay</h3>
+          <p>Pastikan izin <strong>Overlay</strong> sudah diizinkan di Setelan Android. Tanpa izin ini, ikon dan kanvas tidak akan tampil.</p>
+          <h3>Gambar yang disimpan tidak menyertakan layar</h3>
+          <p>Simpan tanpa izin layar hanya berisi goresan. Berikan <strong>Izin Layar</strong> di beranda, atau gunakan screenshot bawaan HP.</p>
+          <h3>Sentuhan tidak merespons di aplikasi lain</h3>
+          <p>Kanvas sedang dalam <strong>Mode Menggambar</strong>. Matikan kanvas atau aktifkan mode <strong>Tembus</strong> agar sentuhan diteruskan ke aplikasi belakang.</p>
+          <h3>Masih bermasalah?</h3>
+          <p>Lihat <a href="faq.html">FAQ</a> atau buka <a href="https://github.com/fiqihbadrian/DrawOverlay/issues">Issues</a> di GitHub.</p>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+            <circle cx="11" cy="11" r="2" />
+          </svg>
+        </span>
+        Stellaire DrawOverlay
+      </a>
+      <ul class="footer-links">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="docs.html">Dokumentasi</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+        <li><a href="privacy.html">Kebijakan Privasi</a></li>
+      </ul>
+      <p class="footer-copy">© <span class="js-year">2026</span> Stellaire DrawOverlay · Draw Anywhere.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

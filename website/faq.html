@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — Stellaire DrawOverlay</title>
+  <meta name="description" content="Pertanyaan yang sering diajukan tentang Stellaire DrawOverlay: cara pakai, izin, penyimpanan, privasi, dan lainnya." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%233B82F6'/%3E%3Cpath d='M20 42l4-10 14-14 6 6-14 14z' fill='%23fff'/%3E%3Cpath d='M40 20l4 4' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================= Navbar ================= -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+            <circle cx="11" cy="11" r="2" />
+          </svg>
+        </span>
+        Stellaire DrawOverlay
+      </a>
+
+      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+
+      <nav aria-label="Navigasi utama">
+        <ul class="nav-links">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="docs.html">Dokumentasi</a></li>
+          <li><a href="faq.html" class="active">FAQ</a></li>
+          <li><a href="changelog.html">Changelog</a></li>
+          <li><a href="privacy.html">Privasi</a></li>
+          <li class="nav-cta">
+            <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="btn btn-primary btn-sm">Unduh APK</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <div class="page-head">
+        <p class="kicker">FAQ</p>
+        <h1>Pertanyaan yang Sering Diajukan</h1>
+        <p>Tidak menemukan jawaban Anda? Buka <a href="https://github.com/fiqihbadrian/DrawOverlay/issues">Issues GitHub</a>.</p>
+      </div>
+
+      <details class="faq" open>
+        <summary>Apa itu Stellaire DrawOverlay?</summary>
+        <div class="faq-body">
+          <p>DrawOverlay adalah aplikasi Android yang menyediakan kanvas transparan (overlay) di atas aplikasi lain. Anda bisa menggambar, memberi anotasi, atau membuat catatan tanpa menghentikan aplikasi yang sedang dibuka — misalnya menulis di atas video, menjelaskan materi saat screen recording, atau menandai dokumen.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Apakah aplikasi ini gratis?</summary>
+        <div class="faq-body">
+          <p>Ya. DrawOverlay gratis, tanpa iklan, dan tanpa langganan. Semua fitur inti dapat digunakan tanpa biaya apa pun.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Android versi apa yang didukung?</summary>
+        <div class="faq-body">
+          <p>DrawOverlay mendukung Android 10 ke atas (API 29+).</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Bagaimana cara mulai menggambar di atas aplikasi lain?</summary>
+        <div class="faq-body">
+          <p>
+            Ikuti 4 langkah ini:
+          </p>
+          <ol>
+            <li>Buka aplikasi dan berikan izin <strong>Overlay</strong> serta <strong>Notifikasi</strong>.</li>
+            <li>Tekan <strong>Start Overlay</strong> — ikon bulat muncul di layar.</li>
+            <li>Buka aplikasi lain yang ingin digambar, lalu <strong>ketuk ikon bulat</strong> untuk mengaktifkan kanvas.</li>
+            <li>Mulai menggambar. Tekan <strong>Simpan</strong> untuk menyimpan PNG ke galeri.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Kenapa saat menyimpan, yang tersimpan hanya coretan, bukan tampilan layar?</summary>
+        <div class="faq-body">
+          <p>Simpan gambar hanya menyimpan goresan di kanvas — <strong>bukan</strong> screenshot layar. Untuk menyertakan tampilan layar, aktifkan <strong>Izin Layar</strong> (MediaProjection) di beranda, atau gunakan fitur screenshot bawaan HP Anda.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Di mana hasil gambar saya disimpan?</summary>
+        <div class="faq-body">
+          <p>Gambar disimpan sebagai PNG di galeri Anda, tepatnya di folder <code>Pictures/DrawOverlay</code>.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Apakah DrawOverlay butuh koneksi internet?</summary>
+        <div class="faq-body">
+          <p>Tidak. DrawOverlay berfungsi sepenuhnya <strong>offline</strong>. Pengenalan tulisan tangan pada Mode Matematika juga diproses langsung di perangkat Anda (on-device), tanpa mengirim data ke mana pun.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Apakah aplikasi mengumpulkan data saya?</summary>
+        <div class="faq-body">
+          <p>Tidak. DrawOverlay tidak mengumpulkan, menyimpan, atau mengirimkan data pribadi apa pun. Tidak ada akun, tidak ada iklan, tidak ada pelacakan. Baca selengkapnya di <a href="privacy.html">Kebijakan Privasi</a>.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Kenapa aplikasi meminta izin notifikasi, penyimpanan, dan izin layar?</summary>
+        <div class="faq-body">
+          <p>Setiap izin hanya digunakan untuk fitur tertentu: <strong>notifikasi</strong> untuk menampilkan info "overlay aktif", <strong>penyimpanan</strong> untuk menyimpan PNG ke galeri, dan <strong>izin layar</strong> (opsional) untuk menyertakan tampilan layar saat menyimpan gambar.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Apa itu Mode Matematika?</summary>
+        <div class="faq-body">
+          <p>Mode Matematika mengenali tulisan tangan Anda langsung di perangkat lalu mengevaluasi ekspresi matematikanya. Saat ini masih dalam tahap pengembangan (beta) dan akan terus disempurnakan.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Bagaimana cara menutup / menghentikan overlay?</summary>
+        <div class="faq-body">
+          <p>Ketuk ikon bulat untuk membuka quick menu, lalu pilih <strong>Hentikan</strong>. Anda juga bisa menekan <strong>Stop Overlay</strong> di halaman beranda aplikasi.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Apakah aplikasi ini boros baterai?</summary>
+        <div class="faq-body">
+          <p>Tidak. DrawOverlay dirancang ringan: kanvas hanya aktif saat Anda menggambar, dan mode tembus/tersembunyi meminimalkan kerja layar. Overlay hanya berjalan selama service aktif — hentikan kapan saja bila tidak digunakan.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Saya menemukan bug. Bagaimana cara melaporkannya?</summary>
+        <div class="faq-body">
+          <p>Silakan buka laporan di <a href="https://github.com/fiqihbadrian/DrawOverlay/issues">Issues GitHub</a>. Sertakan versi aplikasi, tipe HP, dan langkah untuk mereproduksi masalahnya agar bisa segera diperbaiki.</p>
+        </div>
+      </details>
+    </div>
+  </main>
+
+  <!-- ================= Footer ================= -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19l7-7 3 3-7 7-3-3z" />
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+            <circle cx="11" cy="11" r="2" />
+          </svg>
+        </span>
+        Stellaire DrawOverlay
+      </a>
+      <ul class="footer-links">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="docs.html">Dokumentasi</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+        <li><a href="privacy.html">Kebijakan Privasi</a></li>
+      </ul>
+      <p class="footer-copy">© <span class="js-year">2026</span> Stellaire DrawOverlay · Draw Anywhere.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
