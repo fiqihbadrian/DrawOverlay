@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,91 +10,127 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: '#0a0e14',
+            surface: '#11161f',
+            primary: '#3b82f6',
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+        },
+      },
+    };
+  </script>
+  <style>
+    body::before {
+      content: "";
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background: radial-gradient(60% 45% at 50% -5%, rgba(59,130,246,.16), transparent 70%),
+        radial-gradient(45% 35% at 90% 15%, rgba(59,130,246,.07), transparent 70%), #0a0e14;
+    }
+    .text-gradient {
+      background: linear-gradient(90deg, #7ab1ff, #3b82f6);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .prose h2 { font-size: 1.375rem; font-weight: 700; margin: 3rem 0 1rem; padding-top: .5rem; scroll-margin-top: 6rem; letter-spacing: -.3px; }
+    .prose h3 { font-size: 1.0625rem; font-weight: 700; margin: 1.75rem 0 .5rem; }
+    .prose p, .prose li { color: #9aa3b2; font-size: .9375rem; }
+    .prose p { margin-bottom: .9rem; }
+    .prose ul, .prose ol { padding-left: 1.4rem; margin-bottom: 1rem; }
+    .prose li { margin-bottom: .5rem; }
+    .prose strong { color: #f4f6fa; }
+    .prose code { background: #11161f; border: 1px solid rgba(255,255,255,.12); border-radius: 6px; padding: 2px 7px; font-size: .88em; color: #93c5fd; }
+    .prose table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .875rem; }
+    .prose th, .prose td { text-align: left; padding: .6rem .9rem; border: 1px solid rgba(255,255,255,.12); }
+    .prose th { background: #11161f; color: #f4f6fa; }
+    .prose td { color: #9aa3b2; }
+  </style>
 </head>
-<body>
+<body x-data="{ navOpen: false, year: new Date().getFullYear() }" class="bg-base text-[#f4f6fa] font-sans antialiased min-h-screen overflow-x-hidden">
 
   <!-- ================= Navbar ================= -->
-  <header class="nav">
-    <div class="nav-inner">
-      <a href="index.html" class="brand">
-        <span class="brand-logo" aria-hidden="true">
-          <img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" />
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-[#0a0e14]/70 backdrop-blur-xl">
+    <div class="max-w-[1080px] mx-auto flex items-center justify-between gap-5 px-5 py-3.5">
+      <a href="index.html" class="flex items-center gap-2.5 font-bold text-[15px]">
+        <span class="w-9 h-9 rounded-full grid place-items-center bg-gradient-to-tr from-[#4f8ef7] to-[#2563eb] shadow-[0_0_16px_rgba(59,130,246,.28)] overflow-hidden">
+          <img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" class="w-full h-full object-cover" />
         </span>
         Stellaire DrawOverlay
       </a>
 
-      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">
+      <button @click="navOpen = !navOpen" :aria-expanded="navOpen.toString()" aria-label="Buka menu" class="lg:hidden border border-white/10 rounded-[10px] p-2 text-white">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="4" y1="7" x2="20" y2="7" />
-          <line x1="4" y1="12" x2="20" y2="12" />
-          <line x1="4" y1="17" x2="20" y2="17" />
+          <line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" />
         </svg>
       </button>
 
-      <nav aria-label="Navigasi utama">
-        <ul class="nav-links">
-          <li><a href="index.html" class="active">Beranda</a></li>
-          <li><a href="docs.html">Dokumentasi</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="changelog.html">Changelog</a></li>
-          <li><a href="privacy.html">Privasi</a></li>
-          <li class="nav-cta">
-            <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="btn btn-primary btn-sm">Unduh APK</a>
-          </li>
-        </ul>
+      <nav :class="navOpen ? 'flex' : 'hidden'" class="absolute top-full left-0 right-0 lg:static lg:flex flex-col lg:flex-row items-stretch lg:items-center gap-0.5 lg:gap-1 bg-[#0a0e14]/95 lg:bg-transparent border-b lg:border-0 border-white/10 px-4 lg:px-0 pb-4 lg:pb-0" aria-label="Navigasi utama">
+        <template x-for="item in [
+          {label:'Beranda', href:'index.html', active:true},
+          {label:'Dokumentasi', href:'docs.html', active:false},
+          {label:'FAQ', href:'faq.html', active:false},
+          {label:'Changelog', href:'changelog.html', active:false},
+          {label:'Privasi', href:'privacy.html', active:false},
+        ]" :key="item.href">
+          <a :href="item.href" @click="navOpen=false" :class="item.active ? 'text-[#f4f6fa] bg-[rgba(59,130,246,.16)]' : 'text-[#9aa3b2] hover:text-[#f4f6fa] hover:bg-[rgba(59,130,246,.16)]'" class="block rounded-full px-3.5 py-2 text-sm font-medium transition">
+            <span x-text="item.label"></span>
+          </a>
+        </template>
+        <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="lg:ml-2 mt-2 lg:mt-0 inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white text-[13px] font-semibold px-4 py-2 shadow-[0_8px_24px_rgba(59,130,246,.28)] hover:bg-[#4f8ef7] hover:-translate-y-px transition">
+          Unduh APK
+        </a>
       </nav>
     </div>
   </header>
 
   <main>
     <!-- ================= Hero ================= -->
-    <section class="hero">
-      <div class="container">
-        <!-- <span class="hero-badge"><span class="dot"></span> Gratis · Tanpa iklan · 100% offline</span> -->
-        <p class="tagline">Draw Anywhere.</p>
-        <h1>Gambar di atas <span class="accent">aplikasi lain</span>, tanpa berhenti.</h1>
-        <p class="subtitle">
+    <section class="text-center px-5 pt-20 pb-14 lg:pt-[84px]">
+      <div class="max-w-[1080px] mx-auto">
+        <!-- <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[rgba(34,43,56,.44)] text-[#9aa3b2] text-[13px] font-medium px-4 py-1.5 mb-6"><span class="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_8px_#22c55e]"></span> Gratis · Tanpa iklan · 100% offline</span> -->
+        <p class="text-sm font-bold tracking-[3px] uppercase text-primary mb-3.5" data-aos="fade-up">Draw Anywhere.</p>
+        <h1 class="text-[38px] lg:text-[62px] font-extrabold leading-[1.1] -tracking-[1.5px] mb-3" data-aos="fade-up" data-aos-delay="50">Gambar di atas <span class="text-gradient">aplikasi lain</span>, tanpa berhenti.</h1>
+        <p class="max-w-[560px] mx-auto mb-9 text-[#9aa3b2] text-lg" data-aos="fade-up" data-aos-delay="100">
           Stellaire DrawOverlay adalah kanvas transparan yang melayang di atas layar
           Android Anda. Corat-coret, anotasi, atau jelaskan materi — sambil tetap
           menggunakan aplikasi di belakangnya.
         </p>
-        <div class="hero-actions">
-          <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="btn btn-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
+        <div class="flex justify-center flex-wrap gap-3.5 mb-16" data-aos="fade-up" data-aos-delay="150">
+          <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white text-[15px] font-semibold px-6 py-3 shadow-[0_8px_24px_rgba(59,130,246,.28)] hover:bg-[#4f8ef7] hover:-translate-y-px transition">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Unduh APK
           </a>
-          <a href="docs.html" class="btn btn-ghost">Baca Dokumentasi</a>
+          <a href="docs.html" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 text-white text-[15px] font-semibold px-6 py-3 hover:bg-[rgba(59,130,246,.16)] transition">Baca Dokumentasi</a>
         </div>
 
         <!-- Mockup ponsel -->
-        <div class="phone-wrap reveal">
-          <div class="phone">
-            <div class="phone-notch" aria-hidden="true"></div>
-            <div class="phone-screen" aria-hidden="true"></div>
-            <div class="phone-toolbar" aria-hidden="true">
-              <span class="tb on">
+        <div class="flex justify-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="relative w-[250px] h-[520px] rounded-[44px] bg-surface border border-white/10 shadow-[0_40px_90px_rgba(0,0,0,.55),0_0_60px_rgba(59,130,246,.12)] overflow-hidden">
+            <div class="absolute top-3 left-1/2 -translate-x-1/2 w-[90px] h-[22px] rounded-full bg-white/10 z-[3]"></div>
+            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] bg-[length:28px_28px]" aria-hidden="true"></div>
+            <div class="absolute top-[44px] left-1/2 -translate-x-1/2 z-[2] flex gap-1 p-2 rounded-full bg-[rgba(34,43,56,.72)] border border-white/10 backdrop-blur-xl">
+              <span class="w-7 h-7 rounded-full grid place-items-center bg-primary">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
               </span>
-              <span class="tb" style="color:#9aa3b2">▣</span>
-              <span class="tb" style="color:#9aa3b2">↶</span>
-              <span class="tb" style="color:#9aa3b2">⬤</span>
+              <span class="w-7 h-7 rounded-full grid place-items-center text-xs text-[#9aa3b2]">▣</span>
+              <span class="w-7 h-7 rounded-full grid place-items-center text-xs text-[#9aa3b2]">↶</span>
+              <span class="w-7 h-7 rounded-full grid place-items-center text-xs text-[#9aa3b2]">⬤</span>
             </div>
-            <div class="phone-doodle" aria-hidden="true">
-              <svg viewBox="0 0 200 300" fill="none">
+            <div class="absolute top-[60px] bottom-20 left-6 right-6 z-[1]" aria-hidden="true">
+              <svg viewBox="0 0 200 300" fill="none" class="w-full h-full">
                 <path d="M20 220 C 40 180, 30 140, 55 115 S 90 60, 130 45 S 175 80, 160 120" stroke="#3B82F6" stroke-width="5" stroke-linecap="round" />
                 <path d="M150 260 C 120 240, 110 210, 140 190 S 180 160, 175 130" stroke="#93C5FD" stroke-width="3" stroke-linecap="round" />
                 <circle cx="160" cy="205" r="14" stroke="#60A5FA" stroke-width="3" fill="rgba(59,130,246,0.15)" />
               </svg>
             </div>
-            <div class="phone-fab" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 19l7-7 3 3-7 7-3-3z" />
-                <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+            <div class="absolute right-5 bottom-6 w-[52px] h-[52px] rounded-full grid place-items-center bg-primary shadow-[0_10px_28px_rgba(59,130,246,.28)] z-[3]" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="w-[22px] h-[22px] text-white">
+                <path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
               </svg>
             </div>
           </div>
@@ -103,109 +139,105 @@
     </section>
 
     <!-- ================= Fitur ================= -->
-    <section class="section" id="fitur">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="kicker">Fitur</p>
-          <h2>Semua yang Anda butuhkan untuk menulis di layar</h2>
-          <p>Ringan, cepat, dan dirancang agar tidak mengganggu aktivitas Anda.</p>
+    <section class="py-16" id="fitur">
+      <div class="max-w-[1080px] mx-auto px-5">
+        <div class="text-center max-w-[640px] mx-auto mb-11" data-aos="fade-up">
+          <p class="text-[13px] font-bold tracking-[2px] uppercase text-primary mb-2.5">Fitur</p>
+          <h2 class="text-[26px] lg:text-[36px] -tracking-[.5px] mb-3">Semua yang Anda butuhkan untuk menulis di layar</h2>
+          <p class="text-[#9aa3b2]">Ringan, cepat, dan dirancang agar tidak mengganggu aktivitas Anda.</p>
         </div>
 
-        <div class="grid">
-          <div class="card reveal">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="bg-[rgba(34,43,56,.44)] border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:-translate-y-[3px] hover:border-white/25 transition" data-aos="fade-up">
+            <div class="w-11 h-11 rounded-[14px] grid place-items-center bg-[rgba(59,130,246,.16)] border border-[rgba(59,130,246,.3)] mb-4">
+              <svg class="w-[22px] h-[22px] text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg>
             </div>
-            <h3>Kanvas Transparan</h3>
-            <p>Kanvas fullscreen tembus pandang di atas aplikasi mana pun. Sembunyikan kapan saja tanpa menutup aplikasi yang sedang dipakai.</p>
+            <h3 class="text-[17px] mb-2">Kanvas Transparan</h3>
+            <p class="text-[#9aa3b2] text-sm">Kanvas fullscreen tembus pandang di atas aplikasi mana pun. Sembunyikan kapan saja tanpa menutup aplikasi yang sedang dipakai.</p>
           </div>
 
-          <div class="card reveal">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+          <div class="bg-[rgba(34,43,56,.44)] border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:-translate-y-[3px] hover:border-white/25 transition" data-aos="fade-up" data-aos-delay="50">
+            <div class="w-11 h-11 rounded-[14px] grid place-items-center bg-[rgba(59,130,246,.16)] border border-[rgba(59,130,246,.3)] mb-4">
+              <svg class="w-[22px] h-[22px] text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
             </div>
-            <h3>Alat Gambar Lengkap</h3>
-            <p>Pen, brush dengan goresan halus (bezier &amp; spline), penghapus, undo/redo, dan bersihkan kanvas — semua dalam sekali sentuh.</p>
+            <h3 class="text-[17px] mb-2">Alat Gambar Lengkap</h3>
+            <p class="text-[#9aa3b2] text-sm">Pen, brush dengan goresan halus (bezier &amp; spline), penghapus, undo/redo, dan bersihkan kanvas — semua dalam sekali sentuh.</p>
           </div>
 
-          <div class="card reveal">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+          <div class="bg-[rgba(34,43,56,.44)] border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:-translate-y-[3px] hover:border-white/25 transition" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-11 h-11 rounded-[14px] grid place-items-center bg-[rgba(59,130,246,.16)] border border-[rgba(59,130,246,.3)] mb-4">
+              <svg class="w-[22px] h-[22px] text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
             </div>
-            <h3>Palet Warna</h3>
-            <p>Warna preset, kode hex kustom, hingga mode pelangi. Sesuaikan warna dan ukuran brush sesuai kebutuhan.</p>
+            <h3 class="text-[17px] mb-2">Palet Warna</h3>
+            <p class="text-[#9aa3b2] text-sm">Warna preset, kode hex kustom, hingga mode pelangi. Sesuaikan warna dan ukuran brush sesuai kebutuhan.</p>
           </div>
 
-          <div class="card reveal">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <div class="bg-[rgba(34,43,56,.44)] border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:-translate-y-[3px] hover:border-white/25 transition" data-aos="fade-up">
+            <div class="w-11 h-11 rounded-[14px] grid place-items-center bg-[rgba(59,130,246,.16)] border border-[rgba(59,130,246,.3)] mb-4">
+              <svg class="w-[22px] h-[22px] text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             </div>
-            <h3>Simpan PNG ke Galeri</h3>
-            <p>Hasil gambar tersimpan sebagai PNG (transparan atau dengan latar layar) langsung ke galeri, folder Pictures/DrawOverlay.</p>
+            <h3 class="text-[17px] mb-2">Simpan PNG ke Galeri</h3>
+            <p class="text-[#9aa3b2] text-sm">Hasil gambar tersimpan sebagai PNG (transparan atau dengan latar layar) langsung ke galeri, folder Pictures/DrawOverlay.</p>
           </div>
 
-          <div class="card reveal">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
+          <div class="bg-[rgba(34,43,56,.44)] border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:-translate-y-[3px] hover:border-white/25 transition" data-aos="fade-up" data-aos-delay="50">
+            <div class="w-11 h-11 rounded-[14px] grid place-items-center bg-[rgba(59,130,246,.16)] border border-[rgba(59,130,246,.3)] mb-4">
+              <svg class="w-[22px] h-[22px] text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
             </div>
-            <h3>Mode Tembus &amp; Mode Tersembunyi</h3>
-            <p>Touch-through agar sentuhan diteruskan ke aplikasi belakang, atau sembunyikan kanvas — floating button tetap terlihat.</p>
+            <h3 class="text-[17px] mb-2">Mode Tembus &amp; Mode Tersembunyi</h3>
+            <p class="text-[#9aa3b2] text-sm">Touch-through agar sentuhan diteruskan ke aplikasi belakang, atau sembunyikan kanvas — floating button tetap terlihat.</p>
           </div>
 
-          <div class="card reveal">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <div class="bg-[rgba(34,43,56,.44)] border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:-translate-y-[3px] hover:border-white/25 transition" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-11 h-11 rounded-[14px] grid place-items-center bg-[rgba(59,130,246,.16)] border border-[rgba(59,130,246,.3)] mb-4">
+              <svg class="w-[22px] h-[22px] text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             </div>
-            <h3>Privasi Penuh</h3>
-            <p>Semua gambar tersimpan hanya di perangkat. Tanpa akun, tanpa iklan, tanpa pelacakan, tanpa koneksi internet.</p>
+            <h3 class="text-[17px] mb-2">Privasi Penuh</h3>
+            <p class="text-[#9aa3b2] text-sm">Semua gambar tersimpan hanya di perangkat. Tanpa akun, tanpa iklan, tanpa pelacakan, tanpa koneksi internet.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ================= Cara pakai ================= -->
-    <section class="section" style="padding-top: 20px;">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="kicker">Cara Pakai</p>
-          <h2>Mulai menggambar dalam 4 langkah</h2>
+    <section class="pt-5" style="padding-top:20px">
+      <div class="max-w-[1080px] mx-auto px-5">
+        <div class="text-center max-w-[640px] mx-auto mb-11" data-aos="fade-up">
+          <p class="text-[13px] font-bold tracking-[2px] uppercase text-primary mb-2.5">Cara Pakai</p>
+          <h2 class="text-[26px] lg:text-[36px] -tracking-[.5px]">Mulai menggambar dalam 4 langkah</h2>
         </div>
-        <div class="grid">
-          <div class="card reveal">
-            <h3 style="color: var(--primary);">1</h3>
-            <h3>Buka aplikasi &amp; beri izin</h3>
-            <p>Aktifkan izin <strong>Overlay</strong> dan <strong>Notifikasi</strong> lewat halaman beranda.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="bg-[rgba(34,43,56,.44)] border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:-translate-y-[3px] hover:border-white/25 transition" data-aos="fade-up">
+            <h3 class="text-primary">1</h3>
+            <h3 class="text-[17px] mb-2">Buka aplikasi &amp; beri izin</h3>
+            <p class="text-[#9aa3b2] text-sm">Aktifkan izin <strong class="text-[#f4f6fa]">Overlay</strong> dan <strong class="text-[#f4f6fa]">Notifikasi</strong> lewat halaman beranda.</p>
           </div>
-          <div class="card reveal">
-            <h3 style="color: var(--primary);">2</h3>
-            <h3>Mulai overlay</h3>
-            <p>Tekan <strong>Start Overlay</strong> — muncul ikon melayang di pojok layar.</p>
+          <div class="bg-[rgba(34,43,56,.44)] border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:-translate-y-[3px] hover:border-white/25 transition" data-aos="fade-up" data-aos-delay="50">
+            <h3 class="text-primary">2</h3>
+            <h3 class="text-[17px] mb-2">Mulai overlay</h3>
+            <p class="text-[#9aa3b2] text-sm">Tekan <strong class="text-[#f4f6fa]">Start Overlay</strong> — muncul ikon melayang di pojok layar.</p>
           </div>
-          <div class="card reveal">
-            <h3 style="color: var(--primary);">3</h3>
-            <h3>Buka aplikasi lain</h3>
-            <p>Buka video, dokumen, atau layar apa pun. Ketuk ikon melayang untuk mengaktifkan kanvas.</p>
+          <div class="bg-[rgba(34,43,56,.44)] border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:-translate-y-[3px] hover:border-white/25 transition" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="text-primary">3</h3>
+            <h3 class="text-[17px] mb-2">Buka aplikasi lain</h3>
+            <p class="text-[#9aa3b2] text-sm">Buka video, dokumen, atau layar apa pun. Ketuk ikon melayang untuk mengaktifkan kanvas.</p>
           </div>
-          <div class="card reveal">
-            <h3 style="color: var(--primary);">4</h3>
-            <h3>Gambar &amp; simpan</h3>
-            <p>Corat-coret, lalu tekan <strong>Simpan</strong> — PNG siap di galeri Anda.</p>
+          <div class="bg-[rgba(34,43,56,.44)] border border-white/10 rounded-2xl p-6 backdrop-blur-xl hover:-translate-y-[3px] hover:border-white/25 transition" data-aos="fade-up" data-aos-delay="150">
+            <h3 class="text-primary">4</h3>
+            <h3 class="text-[17px] mb-2">Gambar &amp; simpan</h3>
+            <p class="text-[#9aa3b2] text-sm">Corat-coret, lalu tekan <strong class="text-[#f4f6fa]">Simpan</strong> — PNG siap di galeri Anda.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ================= CTA ================= -->
-    <section class="cta-band">
-      <div class="container reveal">
-        <h2>Siap menggambar di mana saja?</h2>
-        <p>Stellaire DrawOverlay untuk Android 10 ke atas. Gratis, ringan, dan tanpa iklan.</p>
-        <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="btn btn-primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
-          </svg>
+    <section class="text-center px-5 py-[72px] border-y border-white/10 bg-gradient-to-b from-[rgba(59,130,246,.08)] to-transparent">
+      <div class="max-w-[1080px] mx-auto" data-aos="fade-up">
+        <h2 class="text-[24px] lg:text-[34px] -tracking-[.5px] mb-3">Siap menggambar di mana saja?</h2>
+        <p class="text-[#9aa3b2] mb-7">Stellaire DrawOverlay untuk Android 10 ke atas. Gratis, ringan, dan tanpa iklan.</p>
+        <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white text-[15px] font-semibold px-6 py-3 shadow-[0_8px_24px_rgba(59,130,246,.28)] hover:bg-[#4f8ef7] hover:-translate-y-px transition">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Unduh APK
         </a>
       </div>
@@ -213,25 +245,28 @@
   </main>
 
   <!-- ================= Footer ================= -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <a href="index.html" class="brand">
-        <span class="brand-logo" aria-hidden="true">
-          <img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" />
+  <footer class="border-t border-white/10 mt-20 px-5 py-11">
+    <div class="max-w-[1080px] mx-auto flex flex-wrap gap-8 justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2.5 font-bold text-sm">
+        <span class="w-9 h-9 rounded-full grid place-items-center bg-gradient-to-tr from-[#4f8ef7] to-[#2563eb] shadow-[0_0_16px_rgba(59,130,246,.28)] overflow-hidden">
+          <img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" class="w-full h-full object-cover" />
         </span>
         Stellaire DrawOverlay
       </a>
-      <ul class="footer-links">
-        <li><a href="index.html">Beranda</a></li>
-        <li><a href="docs.html">Dokumentasi</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="changelog.html">Changelog</a></li>
-        <li><a href="privacy.html">Kebijakan Privasi</a></li>
+      <ul class="flex flex-wrap gap-[18px] list-none">
+        <template x-for="item in [
+          {label:'Beranda',href:'index.html'},{label:'Dokumentasi',href:'docs.html'},{label:'FAQ',href:'faq.html'},
+          {label:'Changelog',href:'changelog.html'},{label:'Kebijakan Privasi',href:'privacy.html'},
+        ]" :key="item.href">
+          <li><a :href="item.href" class="text-[13px] text-[#9aa3b2] hover:text-white" x-text="item.label"></a></li>
+        </template>
       </ul>
-      <p class="footer-copy">© <span class="js-year">2026</span> Stellaire DrawOverlay · Draw Anywhere. · Dibuat dengan ❤️ di Indonesia</p>
+      <p class="basis-full text-center text-[#9aa3b2] text-[13px] pt-6 border-t border-white/10 mt-2">© <span x-text="year"></span> Stellaire DrawOverlay · Draw Anywhere. · Dibuat dengan ❤️ di Indonesia</p>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init({ once: true, duration: 600 });</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>

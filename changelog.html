@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,104 +10,98 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { base:'#0a0e14', surface:'#11161f', primary:'#3b82f6' }, fontFamily:{ sans:['Inter','sans-serif'] } } } };
+  </script>
+  <style>
+    body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; background:radial-gradient(60% 45% at 50% -5%,rgba(59,130,246,.16),transparent 70%),#0a0e14; }
+    .timeline li { position:relative; padding:5px 0 5px 26px; color:#9aa3b2; font-size:.9375rem; }
+    .timeline li::before { content:""; position:absolute; left:4px; top:15px; width:6px; height:6px; border-radius:50%; background:#9aa3b2; opacity:.6; }
+    .timeline li code { background:#11161f; border:1px solid rgba(255,255,255,.12); border-radius:6px; padding:1px 6px; font-size:.88em; color:#93c5fd; }
+  </style>
 </head>
-<body>
+<body x-data="{ navOpen:false, year:new Date().getFullYear() }" class="bg-base text-[#f4f6fa] font-sans antialiased min-h-screen overflow-x-hidden">
 
-  <!-- ================= Navbar ================= -->
-  <header class="nav">
-    <div class="nav-inner">
-      <a href="index.html" class="brand">
-        <span class="brand-logo" aria-hidden="true">
-          <img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" />
-        </span>
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-[#0a0e14]/70 backdrop-blur-xl">
+    <div class="max-w-[1080px] mx-auto flex items-center justify-between gap-5 px-5 py-3.5">
+      <a href="index.html" class="flex items-center gap-2.5 font-bold text-[15px]">
+        <span class="w-9 h-9 rounded-full grid place-items-center bg-gradient-to-tr from-[#4f8ef7] to-[#2563eb] shadow-[0_0_16px_rgba(59,130,246,.28)] overflow-hidden"><img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" class="w-full h-full object-cover" /></span>
         Stellaire DrawOverlay
       </a>
-
-      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="4" y1="7" x2="20" y2="7" />
-          <line x1="4" y1="12" x2="20" y2="12" />
-          <line x1="4" y1="17" x2="20" y2="17" />
-        </svg>
+      <button @click="navOpen = !navOpen" :aria-expanded="navOpen.toString()" aria-label="Buka menu" class="lg:hidden border border-white/10 rounded-[10px] p-2">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" /></svg>
       </button>
-
-      <nav aria-label="Navigasi utama">
-        <ul class="nav-links">
-          <li><a href="index.html">Beranda</a></li>
-          <li><a href="docs.html">Dokumentasi</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="changelog.html" class="active">Changelog</a></li>
-          <li><a href="privacy.html">Privasi</a></li>
-          <li class="nav-cta">
-            <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="btn btn-primary btn-sm">Unduh APK</a>
-          </li>
-        </ul>
+      <nav :class="navOpen?'flex':'hidden'" class="absolute top-full left-0 right-0 lg:static lg:flex flex-col lg:flex-row items-stretch lg:items-center gap-0.5 lg:gap-1 bg-[#0a0e14]/95 lg:bg-transparent border-b lg:border-0 border-white/10 px-4 lg:px-0 pb-4 lg:pb-0" aria-label="Navigasi utama">
+        <template x-for="item in [{label:'Beranda',href:'index.html'},{label:'Dokumentasi',href:'docs.html'},{label:'FAQ',href:'faq.html'},{label:'Changelog',href:'changelog.html',active:true},{label:'Privasi',href:'privacy.html'}]" :key="item.href">
+          <a :href="item.href" @click="navOpen=false" :class="item.active?'text-[#f4f6fa] bg-[rgba(59,130,246,.16)]':'text-[#9aa3b2] hover:text-[#f4f6fa] hover:bg-[rgba(59,130,246,.16)]'" class="block rounded-full px-3.5 py-2 text-sm font-medium transition"><span x-text="item.label"></span></a>
+        </template>
+        <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="lg:ml-2 mt-2 lg:mt-0 inline-flex items-center justify-center rounded-full bg-primary text-white text-[13px] font-semibold px-4 py-2 shadow-[0_8px_24px_rgba(59,130,246,.28)] hover:bg-[#4f8ef7] transition">Unduh APK</a>
       </nav>
     </div>
   </header>
 
-  <main class="page">
-    <div class="container">
-      <div class="page-head">
-        <p class="kicker">Changelog</p>
-        <h1>Riwayat Versi</h1>
-        <p>Perubahan terbaru pertama. Versi saat ini: <strong>1.0.0</strong> (build 1).</p>
+  <main class="py-14 px-5">
+    <div class="max-w-[1080px] mx-auto">
+      <div class="mb-10" data-aos="fade-up">
+        <p class="text-[13px] font-bold tracking-[2px] uppercase text-primary mb-2.5">Changelog</p>
+        <h1 class="text-[30px] lg:text-[44px] -tracking-[1px] mb-2.5">Riwayat Versi</h1>
+        <p class="text-[#9aa3b2]">Perubahan terbaru pertama. Versi saat ini: <strong class="text-[#f4f6fa]">1.0.0</strong> (build 1).</p>
       </div>
 
-      <div class="timeline">
-        <div class="version">
-          <h2>v1.0.0 — Rilis Perdana</h2>
-          <p class="date">Agustus 2026</p>
-          <ul>
-            <li><span class="tag tag-new">Baru</span> Desain sistem Material 3: tema gelap kaca (glassmorphism), palet biru, tipografi modern.</li>
-            <li><span class="tag tag-new">Baru</span> Lapisan Android: overlay service, window manager, kanal Flutter ↔ native, penyimpanan MediaStore.</li>
-            <li><span class="tag tag-new">Baru</span> Kanvas inti: model goresan, controller Riverpod, painter goresan halus (bezier &amp; spline Catmull-Rom).</li>
-            <li><span class="tag tag-new">Baru</span> Quick menu saat ikon overlay diketuk: pen, penghapus, ukuran, warna, undo/redo, bersihkan, simpan, tembus, hentikan.</li>
-            <li><span class="tag tag-new">Baru</span> Simpan PNG ke galeri (<code>Pictures/DrawOverlay</code>) — PNG transparan atau menyertakan latar layar (MediaProjection).</li>
-            <li><span class="tag tag-new">Baru</span> Baris izin "Izin Layar" di beranda, setelan penyimpanan, dan refresh izin real-time saat kembali ke aplikasi.</li>
-            <li><span class="tag tag-new">Baru</span> Izin penuh ditambahkan untuk pengenalan tulisan tangan on-device (ML Kit digital ink).</li>
-            <li><span class="tag tag-fix">Perbaikan</span> Toolbar anti-lag (seleksi state Riverpod), perbaikan scroll beranda agar tidak overflow.</li>
-            <li><span class="tag tag-fix">Perbaikan</span> Teardown overlay anti-crash saat berhenti; sinkronisasi polling native ↔ Dart yang lebih andal.</li>
-            <li><span class="tag tag-fix">Perbaikan</span> Ikon overlay diperkecil dan dibulatkan — murni logo aplikasi tanpa lingkaran biru.</li>
+      <div class="border-l-2 border-white/10 pl-7 max-w-[720px] timeline space-y-11">
+        <div class="relative" data-aos="fade-up">
+          <span class="absolute -left-[35px] top-[7px] w-3.5 h-3.5 rounded-full bg-primary shadow-[0_0_12px_rgba(59,130,246,.28)]"></span>
+          <h2 class="flex items-center flex-wrap gap-3 text-[20px] mb-1.5 -tracking-[.3px]">v1.0.0 — Rilis Perdana</h2>
+          <p class="text-[13px] font-medium text-[#9aa3b2] mb-3.5">Agustus 2026</p>
+          <ul class="list-none p-0">
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(34,197,94,.16)] text-[#22c55e]">Baru</span> Desain sistem Material 3: tema gelap kaca (glassmorphism), palet biru, tipografi modern.</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(34,197,94,.16)] text-[#22c55e]">Baru</span> Lapisan Android: overlay service, window manager, kanal Flutter ↔ native, penyimpanan MediaStore.</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(34,197,94,.16)] text-[#22c55e]">Baru</span> Kanvas inti: model goresan, controller Riverpod, painter goresan halus (bezier &amp; spline Catmull-Rom).</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(34,197,94,.16)] text-[#22c55e]">Baru</span> Quick menu saat ikon overlay diketuk: pen, penghapus, ukuran, warna, undo/redo, bersihkan, simpan, tembus, hentikan.</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(34,197,94,.16)] text-[#22c55e]">Baru</span> Simpan PNG ke galeri (<code>Pictures/DrawOverlay</code>) — PNG transparan atau menyertakan latar layar (MediaProjection).</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(34,197,94,.16)] text-[#22c55e]">Baru</span> Baris izin "Izin Layar" di beranda, setelan penyimpanan, dan refresh izin real-time saat kembali ke aplikasi.</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(34,197,94,.16)] text-[#22c55e]">Baru</span> Izin penuh ditambahkan untuk pengenalan tulisan tangan on-device (ML Kit digital ink).</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(239,68,68,.16)] text-[#ef4444]">Perbaikan</span> Toolbar anti-lag (seleksi state Riverpod), perbaikan scroll beranda agar tidak overflow.</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(239,68,68,.16)] text-[#ef4444]">Perbaikan</span> Teardown overlay anti-crash saat berhenti; sinkronisasi polling native ↔ Dart yang lebih andal.</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(239,68,68,.16)] text-[#ef4444]">Perbaikan</span> Ikon overlay diperkecil dan dibulatkan — murni logo aplikasi tanpa lingkaran biru.</li>
           </ul>
         </div>
 
-        <div class="version">
-          <h2>Pra-rilis (Pengembangan)</h2>
-          <p class="date">Juni – Juli 2026</p>
-          <ul>
-            <li><span class="tag tag-new">Baru</span> Inisialisasi proyek Flutter dengan Riverpod &amp; SharedPreferences.</li>
-            <li><span class="tag tag-new">Baru</span> Quick menu awal: ikon cepat untuk mengaktifkan kanvas saat floating button diketuk.</li>
-            <li><span class="tag tag-new">Baru</span> Penyimpanan ke galeri dengan kuas halus bezier.</li>
-            <li><span class="tag tag-fix">Perbaikan</span> Popup menu saat floating button diketuk dan teardown service anti-crash.</li>
-            <li><span class="tag tag-fix">Perbaikan</span> Sinkronisasi state window (native sebagai sumber kebenaran) dan feedback toast.</li>
+        <div class="relative" data-aos="fade-up">
+          <span class="absolute -left-[35px] top-[7px] w-3.5 h-3.5 rounded-full bg-primary shadow-[0_0_12px_rgba(59,130,246,.28)]"></span>
+          <h2 class="text-[20px] mb-1.5 -tracking-[.3px]">Pra-rilis (Pengembangan)</h2>
+          <p class="text-[13px] font-medium text-[#9aa3b2] mb-3.5">Juni – Juli 2026</p>
+          <ul class="list-none p-0">
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(34,197,94,.16)] text-[#22c55e]">Baru</span> Inisialisasi proyek Flutter dengan Riverpod &amp; SharedPreferences.</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(34,197,94,.16)] text-[#22c55e]">Baru</span> Quick menu awal: ikon cepat untuk mengaktifkan kanvas saat floating button diketuk.</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(34,197,94,.16)] text-[#22c55e]">Baru</span> Penyimpanan ke galeri dengan kuas halus bezier.</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(239,68,68,.16)] text-[#ef4444]">Perbaikan</span> Popup menu saat floating button diketuk dan teardown service anti-crash.</li>
+            <li><span class="inline-block text-[11px] font-bold uppercase tracking-[.5px] rounded-full px-2.5 py-0.5 mr-2 bg-[rgba(239,68,68,.16)] text-[#ef4444]">Perbaikan</span> Sinkronisasi state window (native sebagai sumber kebenaran) dan feedback toast.</li>
           </ul>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- ================= Footer ================= -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <a href="index.html" class="brand">
-        <span class="brand-logo" aria-hidden="true">
-          <img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" />
-        </span>
+  <footer class="border-t border-white/10 mt-20 px-5 py-11">
+    <div class="max-w-[1080px] mx-auto flex flex-wrap gap-8 justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2.5 font-bold text-sm">
+        <span class="w-9 h-9 rounded-full grid place-items-center bg-gradient-to-tr from-[#4f8ef7] to-[#2563eb] shadow-[0_0_16px_rgba(59,130,246,.28)] overflow-hidden"><img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" class="w-full h-full object-cover" /></span>
         Stellaire DrawOverlay
       </a>
-      <ul class="footer-links">
-        <li><a href="index.html">Beranda</a></li>
-        <li><a href="docs.html">Dokumentasi</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="changelog.html">Changelog</a></li>
-        <li><a href="privacy.html">Kebijakan Privasi</a></li>
+      <ul class="flex flex-wrap gap-[18px] list-none">
+        <template x-for="item in [{label:'Beranda',href:'index.html'},{label:'Dokumentasi',href:'docs.html'},{label:'FAQ',href:'faq.html'},{label:'Changelog',href:'changelog.html'},{label:'Kebijakan Privasi',href:'privacy.html'}]" :key="item.href">
+          <li><a :href="item.href" class="text-[13px] text-[#9aa3b2] hover:text-white" x-text="item.label"></a></li>
+        </template>
       </ul>
-      <p class="footer-copy">© <span class="js-year">2026</span> Stellaire DrawOverlay · Draw Anywhere.</p>
+      <p class="basis-full text-center text-[#9aa3b2] text-[13px] pt-6 border-t border-white/10 mt-2">© <span x-text="year"></span> Stellaire DrawOverlay · Draw Anywhere.</p>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init({ once:true, duration:600 });</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>

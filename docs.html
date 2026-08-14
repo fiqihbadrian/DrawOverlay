@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,71 +10,71 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { base: '#0a0e14', surface: '#11161f', primary: '#3b82f6' }, fontFamily: { sans: ['Inter','sans-serif'] } } },
+    };
+  </script>
+  <style>
+    body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; background:radial-gradient(60% 45% at 50% -5%,rgba(59,130,246,.16),transparent 70%),#0a0e14; }
+    .prose h2 { font-size:1.375rem; font-weight:700; margin:3rem 0 1rem; padding-top:.5rem; scroll-margin-top:6rem; letter-spacing:-.3px; }
+    .prose h3 { font-size:1.0625rem; font-weight:700; margin:1.75rem 0 .5rem; }
+    .prose p,.prose li { color:#9aa3b2; font-size:.9375rem; }
+    .prose p { margin-bottom:.9rem; }
+    .prose ul,.prose ol { padding-left:1.4rem; margin-bottom:1rem; }
+    .prose li { margin-bottom:.5rem; }
+    .prose strong { color:#f4f6fa; }
+    .prose code { background:#11161f; border:1px solid rgba(255,255,255,.12); border-radius:6px; padding:2px 7px; font-size:.88em; color:#93c5fd; }
+    .prose table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:.875rem; }
+    .prose th,.prose td { text-align:left; padding:.6rem .9rem; border:1px solid rgba(255,255,255,.12); }
+    .prose th { background:#11161f; color:#f4f6fa; }
+    .prose td { color:#9aa3b2; }
+    .toc a { display:block; padding:7px 12px; font-size:14px; color:#9aa3b2; border-left:2px solid transparent; margin-left:-1px; border-radius:0 8px 8px 0; }
+    .toc a:hover { color:#f4f6fa; background:rgba(59,130,246,.16); }
+    .toc a.active { color:#f4f6fa; border-left-color:#3b82f6; background:rgba(59,130,246,.16); }
+  </style>
 </head>
-<body>
+<body x-data="{ navOpen:false, year:new Date().getFullYear(), current:'' }" class="bg-base text-[#f4f6fa] font-sans antialiased min-h-screen overflow-x-hidden">
 
-  <!-- ================= Navbar ================= -->
-  <header class="nav">
-    <div class="nav-inner">
-      <a href="index.html" class="brand">
-        <span class="brand-logo" aria-hidden="true">
-          <img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" />
-        </span>
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-[#0a0e14]/70 backdrop-blur-xl">
+    <div class="max-w-[1080px] mx-auto flex items-center justify-between gap-5 px-5 py-3.5">
+      <a href="index.html" class="flex items-center gap-2.5 font-bold text-[15px]">
+        <span class="w-9 h-9 rounded-full grid place-items-center bg-gradient-to-tr from-[#4f8ef7] to-[#2563eb] shadow-[0_0_16px_rgba(59,130,246,.28)] overflow-hidden"><img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" class="w-full h-full object-cover" /></span>
         Stellaire DrawOverlay
       </a>
-
-      <button class="nav-toggle" aria-label="Buka menu" aria-expanded="false">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <line x1="4" y1="7" x2="20" y2="7" />
-          <line x1="4" y1="12" x2="20" y2="12" />
-          <line x1="4" y1="17" x2="20" y2="17" />
-        </svg>
+      <button @click="navOpen = !navOpen" :aria-expanded="navOpen.toString()" aria-label="Buka menu" class="lg:hidden border border-white/10 rounded-[10px] p-2">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" /></svg>
       </button>
-
-      <nav aria-label="Navigasi utama">
-        <ul class="nav-links">
-          <li><a href="index.html">Beranda</a></li>
-          <li><a href="docs.html" class="active">Dokumentasi</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="changelog.html">Changelog</a></li>
-          <li><a href="privacy.html">Privasi</a></li>
-          <li class="nav-cta">
-            <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="btn btn-primary btn-sm">Unduh APK</a>
-          </li>
-        </ul>
+      <nav :class="navOpen?'flex':'hidden'" class="absolute top-full left-0 right-0 lg:static lg:flex flex-col lg:flex-row items-stretch lg:items-center gap-0.5 lg:gap-1 bg-[#0a0e14]/95 lg:bg-transparent border-b lg:border-0 border-white/10 px-4 lg:px-0 pb-4 lg:pb-0" aria-label="Navigasi utama">
+        <template x-for="item in [{label:'Beranda',href:'index.html'},{label:'Dokumentasi',href:'docs.html',active:true},{label:'FAQ',href:'faq.html'},{label:'Changelog',href:'changelog.html'},{label:'Privasi',href:'privacy.html'}]" :key="item.href">
+          <a :href="item.href" @click="navOpen=false" :class="item.active?'text-[#f4f6fa] bg-[rgba(59,130,246,.16)]':'text-[#9aa3b2] hover:text-[#f4f6fa] hover:bg-[rgba(59,130,246,.16)]'" class="block rounded-full px-3.5 py-2 text-sm font-medium transition"><span x-text="item.label"></span></a>
+        </template>
+        <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="lg:ml-2 mt-2 lg:mt-0 inline-flex items-center justify-center rounded-full bg-primary text-white text-[13px] font-semibold px-4 py-2 shadow-[0_8px_24px_rgba(59,130,246,.28)] hover:bg-[#4f8ef7] transition">Unduh APK</a>
       </nav>
     </div>
   </header>
 
-  <main class="page">
-    <div class="container">
-      <div class="page-head">
-        <p class="kicker">Dokumentasi</p>
-        <h1>Panduan Stellaire DrawOverlay</h1>
-        <p>Semua yang perlu Anda ketahui untuk menggunakan DrawOverlay — dari izin pertama hingga menyimpan hasil gambar.</p>
+  <main class="py-14 px-5">
+    <div class="max-w-[1080px] mx-auto">
+      <div class="mb-10" data-aos="fade-up">
+        <p class="text-[13px] font-bold tracking-[2px] uppercase text-primary mb-2.5">Dokumentasi</p>
+        <h1 class="text-[30px] lg:text-[44px] -tracking-[1px] mb-2.5">Panduan Stellaire DrawOverlay</h1>
+        <p class="text-[#9aa3b2] max-w-[640px]">Semua yang perlu Anda ketahui untuk menggunakan DrawOverlay — dari izin pertama hingga menyimpan hasil gambar.</p>
       </div>
 
-      <div class="docs-layout">
+      <div class="grid lg:grid-cols-[230px_1fr] gap-11 items-start">
         <!-- TOC -->
-        <nav class="toc" aria-label="Daftar isi">
-          <p class="toc-label">Daftar Isi</p>
-          <a href="#persyaratan">Persyaratan</a>
-          <a href="#instalasi">Instalasi</a>
-          <a href="#izin">Izin yang Dibutuhkan</a>
-          <a href="#ikon-overlay">Ikon Overlay</a>
-          <a href="#menggambar">Menggambar</a>
-          <a href="#quick-menu">Quick Menu</a>
-          <a href="#mode-kanvas">Mode Kanvas</a>
-          <a href="#kotak-layer">Kotak Kanvas &amp; Layer</a>
-          <a href="#menyimpan">Menyimpan PNG</a>
-          <a href="#mode-matematika">Mode Matematika</a>
-          <a href="#setelan">Setelan</a>
-          <a href="#pemecahan">Pemecahan Masalah</a>
+        <nav class="lg:sticky lg:top-24 border-l lg:border-white/10 pl-1 lg:pl-1 flex flex-wrap lg:block gap-1.5 mb-6 lg:mb-0 toc" aria-label="Daftar isi">
+          <p class="w-full text-[12px] font-bold tracking-[1.5px] uppercase text-[#9aa3b2] mb-2 lg:ml-3">Daftar Isi</p>
+          <template x-for="t in ['persyaratan','instalasi','izin','ikon-overlay','menggambar','quick-menu','mode-kanvas','kotak-layer','menyimpan','mode-matematika','setelan','pemecahan']" :key="t">
+            <a :href="'#'+t" @click="current=t" :class="current===t?'active':''" class="lg:border-l-2 lg:border-transparent lg:rounded-r-lg rounded-full" x-text="tocLabel(t)"></a>
+          </template>
         </nav>
 
         <!-- Konten -->
-        <article class="prose">
+        <article class="prose max-w-[760px]">
           <h2 id="persyaratan">1. Persyaratan Sistem</h2>
           <table>
             <tr><th>Platform</th><td>Android</td></tr>
@@ -85,7 +85,7 @@
 
           <h2 id="instalasi">2. Instalasi</h2>
           <ol>
-            <li>Unduh file <code>.apk</code> dari halaman <a href="https://github.com/fiqihbadrian/DrawOverlay/releases">Releases</a>.</li>
+            <li>Unduh file <code>.apk</code> dari halaman <a href="https://github.com/fiqihbadrian/DrawOverlay/releases" class="text-primary">Releases</a>.</li>
             <li>Buka file tersebut di HP Android Anda.</li>
             <li>Jika muncul peringatan <em>"instal dari sumber tidak dikenal"</em>, izinkan (biasanya di <strong>Setelan → Keamanan → Instal aplikasi tidak dikenal</strong>).</li>
             <li>Buka aplikasi <strong>Stellaire DrawOverlay</strong>.</li>
@@ -100,9 +100,7 @@
             <tr><td><strong>Penyimpanan</strong></td><td>Menyimpan PNG ke galeri Anda (<code>Pictures/DrawOverlay</code>).</td></tr>
             <tr><td><strong>Izin Layar</strong></td><td>Opsional — untuk menyertakan tampilan layar saat menyimpan PNG (MediaProjection).</td></tr>
           </table>
-          <div class="note">
-            <strong>Catatan:</strong> semua izin dapat dicabut kapan saja lewat Setelan Android. Tanpa izin Overlay, aplikasi tidak dapat menggambar di atas aplikasi lain.
-          </div>
+          <div class="bg-[rgba(59,130,246,.16)] border border-[rgba(59,130,246,.3)] rounded-[10px] p-3.5 mb-4"><strong class="text-[#93c5fd]">Catatan:</strong> semua izin dapat dicabut kapan saja lewat Setelan Android. Tanpa izin Overlay, aplikasi tidak dapat menggambar di atas aplikasi lain.</div>
 
           <h2 id="ikon-overlay">4. Ikon Overlay (Floating Button)</h2>
           <p>Setelah menekan <strong>Start Overlay</strong>, sebuah ikon bulat muncul di pojok layar. Ikon ini selalu tersedia selama overlay aktif.</p>
@@ -153,13 +151,11 @@
             <li><strong>PNG transparan</strong> — hanya goresan Anda dengan latar transparan.</li>
             <li><strong>PNG dengan latar layar</strong> — menyertakan screenshot layar di belakang goresan (membutuhkan izin layar / MediaProjection).</li>
           </ul>
-          <div class="note">
-            <strong>Catatan:</strong> tanpa izin layar, penyimpanan hanya berisi goresan di kanvas — <em>bukan</em> screenshot layar. Untuk menyertakan tampilan layar, gunakan izin layar atau fitur screenshot bawaan HP Anda.
-          </div>
+          <div class="bg-[rgba(59,130,246,.16)] border border-[rgba(59,130,246,.3)] rounded-[10px] p-3.5 mb-4"><strong class="text-[#93c5fd]">Catatan:</strong> tanpa izin layar, penyimpanan hanya berisi goresan di kanvas — <em>bukan</em> screenshot layar. Untuk menyertakan tampilan layar, gunakan izin layar atau fitur screenshot bawaan HP Anda.</div>
 
           <h2 id="mode-matematika">10. Mode Matematika (Beta)</h2>
           <p>Mode Matematika mengenali tulisan tangan Anda langsung di perangkat (pengenalan digital ink ML Kit on-device) lalu mengevaluasi ekspresinya. Tidak ada data yang dikirim ke internet — semuanya diproses lokal. Dukung pengenalan simbol dengan mengoreksi hasil lewat dialog pilihan simbol; koreksi Anda disimpan untuk belajar.</p>
-          <div class="note"><strong>Status:</strong> Mode Matematika masih dalam pengembangan dan penyempurnaan.</div>
+          <div class="bg-[rgba(59,130,246,.16)] border border-[rgba(59,130,246,.3)] rounded-[10px] p-3.5 mb-4"><strong class="text-[#93c5fd]">Status:</strong> Mode Matematika masih dalam pengembangan dan penyempurnaan.</div>
 
           <h2 id="setelan">11. Setelan</h2>
           <ul>
@@ -177,32 +173,36 @@
           <h3>Sentuhan tidak merespons di aplikasi lain</h3>
           <p>Kanvas sedang dalam <strong>Mode Menggambar</strong>. Matikan kanvas atau aktifkan mode <strong>Tembus</strong> agar sentuhan diteruskan ke aplikasi belakang.</p>
           <h3>Masih bermasalah?</h3>
-          <p>Lihat <a href="faq.html">FAQ</a> atau buka <a href="https://github.com/fiqihbadrian/DrawOverlay/issues">Issues</a> di GitHub.</p>
+          <p>Lihat <a href="faq.html" class="text-primary">FAQ</a> atau buka <a href="https://github.com/fiqihbadrian/DrawOverlay/issues" class="text-primary">Issues</a> di GitHub.</p>
         </article>
       </div>
     </div>
   </main>
 
-  <!-- ================= Footer ================= -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <a href="index.html" class="brand">
-        <span class="brand-logo" aria-hidden="true">
-          <img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" />
-        </span>
+  <footer class="border-t border-white/10 mt-20 px-5 py-11">
+    <div class="max-w-[1080px] mx-auto flex flex-wrap gap-8 justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2.5 font-bold text-sm">
+        <span class="w-9 h-9 rounded-full grid place-items-center bg-gradient-to-tr from-[#4f8ef7] to-[#2563eb] shadow-[0_0_16px_rgba(59,130,246,.28)] overflow-hidden"><img src="icons/app-icon.png" alt="Logo Stellaire DrawOverlay" class="w-full h-full object-cover" /></span>
         Stellaire DrawOverlay
       </a>
-      <ul class="footer-links">
-        <li><a href="index.html">Beranda</a></li>
-        <li><a href="docs.html">Dokumentasi</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="changelog.html">Changelog</a></li>
-        <li><a href="privacy.html">Kebijakan Privasi</a></li>
+      <ul class="flex flex-wrap gap-[18px] list-none">
+        <template x-for="item in [{label:'Beranda',href:'index.html'},{label:'Dokumentasi',href:'docs.html'},{label:'FAQ',href:'faq.html'},{label:'Changelog',href:'changelog.html'},{label:'Kebijakan Privasi',href:'privacy.html'}]" :key="item.href">
+          <li><a :href="item.href" class="text-[13px] text-[#9aa3b2] hover:text-white" x-text="item.label"></a></li>
+        </template>
       </ul>
-      <p class="footer-copy">© <span class="js-year">2026</span> Stellaire DrawOverlay · Draw Anywhere.</p>
+      <p class="basis-full text-center text-[#9aa3b2] text-[13px] pt-6 border-t border-white/10 mt-2">© <span x-text="year"></span> Stellaire DrawOverlay · Draw Anywhere.</p>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script>
+    // ponytail: scroll-spy TOC pakai click-highlight saja; IntersectionObserver add kalau perlu
+    function tocLabel(id){
+      const map={persyaratan:'Persyaratan',instalasi:'Instalasi',izin:'Izin yang Dibutuhkan','ikon-overlay':'Ikon Overlay',menggambar:'Menggambar','quick-menu':'Quick Menu','mode-kanvas':'Mode Kanvas','kotak-layer':'Kotak Kanvas & Layer',menyimpan:'Menyimpan PNG','mode-matematika':'Mode Matematika',setelan:'Setelan',pemecahan:'Pemecahan Masalah'};
+      return map[id]||id;
+    }
+  </script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init({ once:true, duration:600 });</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
